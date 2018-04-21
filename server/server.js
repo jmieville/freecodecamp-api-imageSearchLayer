@@ -3,10 +3,11 @@ var express = require('express')
 const GoogleImages = require('google-images')
 var {mongoose} = require('./db/mongoose')
 var moment = require('moment')
-
+var id = process.env.CSE_ID
+var apiKey = process.env.CSE_API_KEY
 var app = express()
 var port = process.env.PORT || 3000
-const client = new GoogleImages(process.env.CSE_ID, process.env.CSE_API_KEY)
+const client = new GoogleImages(id, apiKey)
 var {SearchResults} = require('../models/imagesResult')
 app.get('/', (req, res) => {
   res.send(`Welcome Home to Search Image Service 
@@ -33,8 +34,8 @@ app.get('/api/imagesearch/:search', async (req, res) => {
       term: req.params.search,
       when: moment().format('LLLL')
     })
-    searchHistory.save()
-    res.send(imagesSearchResults)
+    await searchHistory.save()
+    await res.send(imagesSearchResults)
   } catch (err) {
     res.status(400).send(err.message)
   }
