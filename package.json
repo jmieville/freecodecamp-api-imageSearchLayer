@@ -7,7 +7,7 @@
     "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engine": {
+  "engines": {
     "node": "9.11.1"
   },
   "author": "Jean-Marc Kampol Mieville",
