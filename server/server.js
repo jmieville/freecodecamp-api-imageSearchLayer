@@ -30,11 +30,11 @@ app.get('/api/imagesearch/:search', async (req, res) => {
       }
       imagesSearchResults.push(searchResult)
     })
-    var searchHistory = await new SearchResults({
-      term: req.params.search,
-      when: moment().format('LLLL')
-    })
-    await searchHistory.save()
+    // var searchHistory = await new SearchResults({
+    //   term: req.params.search,
+    //   when: moment().format('LLLL')
+    // })
+    // await searchHistory.save()
     await res.send(imagesSearchResults)
   } catch (err) {
     res.status(400).send(err.message)
