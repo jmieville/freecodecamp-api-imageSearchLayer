@@ -43,7 +43,7 @@ app.get('/api/imagesearch/:search', async (req, res) => {
 
 app.get('/api/latest/imagesearch/', async (req, res) => {
   var historySearch = await SearchResults.find().select("-_id").select('-__v')
-  res.send(`${process.env.CSE_ID} and ${process.env.CSE_API_KEY}`)
+  res.send(historySearch)
 })
 
 app.listen(port, () => {
