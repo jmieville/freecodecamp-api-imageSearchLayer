@@ -31,19 +31,19 @@ app.get('/api/imagesearch/:search', async (req, res) => {
   } catch (err) {
     console.log('There was an error saving the search history', err.message)
   }
+  var imagesSearchResults = []
   try {
-    var imagesSearchResults = []
     var results = await client.search(req.params.search, {page: req.query.offset})
-    await results.forEach(result => {
-      var searchResult = {
-        url: result.url,
-        snippet: result.description,
-        thumbnail: result.thumbnail.url,
-        context: result.parentPage
-      }
-      imagesSearchResults.push(searchResult)
-    })
-    res.send(imagesSearchResults)
+    // results.forEach(result => {
+    //   var searchResult = {
+    //     url: result.url,
+    //     snippet: result.description,
+    //     thumbnail: result.thumbnail.url,
+    //     context: result.parentPage
+    //   }
+    //   imagesSearchResults.push(searchResult)
+    // })
+    res.send(results)
   } catch (err) {
     res.status(400).send(err)
   }
