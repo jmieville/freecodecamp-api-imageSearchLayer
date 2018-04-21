@@ -5,8 +5,8 @@ var {mongoose} = require('./db/mongoose')
 var moment = require('moment')
 var bodyParser = require('body-parser')
 
-var id = process.env.CSE_ID
-var apiKey = process.env.CSE_API_KEY
+var id = '014268238217755027955:9j6kwzgwd9i'
+var apiKey = 'AIzaSyD07jO6kWafMijyRCtDP5f-YJd4wz3ecZI'
 var app = express()
 var port = process.env.PORT || 3000
 const client = new GoogleImages(id.toString(), apiKey.toString())
@@ -34,16 +34,16 @@ app.get('/api/imagesearch/:search', async (req, res) => {
   var imagesSearchResults = []
   try {
     var results = await client.search(req.params.search, {page: req.query.offset})
-    // results.forEach(result => {
-    //   var searchResult = {
-    //     url: result.url,
-    //     snippet: result.description,
-    //     thumbnail: result.thumbnail.url,
-    //     context: result.parentPage
-    //   }
-    //   imagesSearchResults.push(searchResult)
-    // })
-    res.send(results)
+    results.forEach(result => {
+      var searchResult = {
+        url: result.url,
+        snippet: result.description,
+        thumbnail: result.thumbnail.url,
+        context: result.parentPage
+      }
+      imagesSearchResults.push(searchResult)
+    })
+    res.send(imagesSearchResults)
   } catch (err) {
     res.status(400).send(err)
   }
