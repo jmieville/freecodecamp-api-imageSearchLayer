@@ -7,7 +7,7 @@ var id = process.env.CSE_ID
 var apiKey = process.env.CSE_API_KEY
 var app = express()
 var port = process.env.PORT || 3000
-const client = new GoogleImages(id, apiKey)
+const client = new GoogleImages(id.toString(), apiKey.toString())
 var {SearchResults} = require('../models/imagesResult')
 app.get('/', (req, res) => {
   res.send(`Welcome Home to Search Image Service 
@@ -30,11 +30,11 @@ app.get('/api/imagesearch/:search', async (req, res) => {
       }
       imagesSearchResults.push(searchResult)
     })
-    // var searchHistory = await new SearchResults({
-    //   term: req.params.search,
-    //   when: moment().format('LLLL')
-    // })
-    // await searchHistory.save()
+    var searchHistory = await new SearchResults({
+      term: req.params.search,
+      when: moment().format('LLLL')
+    })
+    await searchHistory.save()
     await res.send(imagesSearchResults)
   } catch (err) {
     res.status(400).send(err.message)
