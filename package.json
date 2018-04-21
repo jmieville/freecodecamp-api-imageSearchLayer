@@ -13,6 +13,7 @@
   "author": "Jean-Marc Kampol Mieville",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "google-images": "^2.1.0",

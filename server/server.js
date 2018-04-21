@@ -3,12 +3,16 @@ var express = require('express')
 const GoogleImages = require('google-images')
 var {mongoose} = require('./db/mongoose')
 var moment = require('moment')
+var bodyParser = require('body-parser')
+
 var id = process.env.CSE_ID
 var apiKey = process.env.CSE_API_KEY
 var app = express()
 var port = process.env.PORT || 3000
 const client = new GoogleImages(id.toString(), apiKey.toString())
 var {SearchResults} = require('../models/imagesResult')
+app.use(bodyParser.urlencoded({ extended: true }))
+
 app.get('/', (req, res) => {
   res.send(`Welcome Home to Search Image Service 
   \nPlease use through: 
