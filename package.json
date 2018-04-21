@@ -13,15 +13,11 @@
   "author": "Jean-Marc Kampol Mieville",
   "license": "ISC",
   "dependencies": {
-    "bing.search": "^1.0.1",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "google-images": "^2.1.0",
-    "google-search-scrape": "^0.2.5",
-    "images-scraper": "^2.0.11",
     "moment": "^2.22.1",
     "mongoose": "^5.0.15",
-    "node-google-image-search": "^1.0.3",
     "npm": "^5.8.0"
   }
 }

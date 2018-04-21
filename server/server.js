@@ -20,29 +20,29 @@ app.get('/', (req, res) => {
 app.get('/api/imagesearch/:search', async (req, res) => {
   try {
     var imagesSearchResults = []
-    var results = await client.search(req.params.search, {page: req.query.offset})
-    await results.forEach(result => {
-      var searchResult = {
-        url: result.url,
-        snippet: result.description,
-        thumbnail: result.thumbnail.url,
-        context: result.parentPage
-      }
-      imagesSearchResults.push(searchResult)
-    })
+    // var results = await client.search(req.params.search, {page: req.query.offset})
+    // await results.forEach(result => {
+    //   var searchResult = {
+    //     url: result.url,
+    //     snippet: result.description,
+    //     thumbnail: result.thumbnail.url,
+    //     context: result.parentPage
+    //   }
+    //   imagesSearchResults.push(searchResult)
+    // })
     var searchHistory = await new SearchResults({
       term: req.params.search,
       when: moment().format('LLLL')
     })
-    await searchHistory.save()
-    await res.send(imagesSearchResults)
+    searchHistory.save()
+    res.send(imagesSearchResults)
   } catch (err) {
     res.status(400).send(err.message)
   }
 })
 
 app.get('/api/latest/imagesearch/', async (req, res) => {
-  var historySearch = await SearchResults.find().select("-_id").select('-__v')
+  var historySearch = await SearchResults.find().select('-_id').select('-__v')
   res.send(historySearch)
 })
 
